@@ -58,3 +58,11 @@ div.hidden:hover {
 div.marked, div.marked:hover {
   background: no-repeat center/60% url("images/mark.svg") deepskyblue;
 }
+
+.button-reset{
+  height: 30px;
+  width:  150px;
+  font-family: Georgia;
+  font-size: 22px;
+  margin-top: 50px;
+}

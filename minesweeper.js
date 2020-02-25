@@ -24,12 +24,14 @@ function makeBoard (num){
   return cells
 }
 
-board.cells =  makeBoard(5)
+
 
 
 function startGame () {
   document.addEventListener("click", checkForWin )
   document.addEventListener("contextmenu", checkForWin )
+
+  board.cells =  makeBoard(5)
 
   for(var i = 0; i < board.cells.length; i ++){
     surroundingMines = countSurroundingMines(board.cells[i])
@@ -51,11 +53,20 @@ function checkForWin () {
       win = win + 1
     }
     
-  }
+  } 
+  
   // You can use this function call to declare a winner (once you've
   // detected that they've won, that is!)
   if(win == board.cells.length){
    lib.displayMessage('You win!')
+   var audio1 = new Audio();
+    audio1.src = "Sounds/Winner.wav";
+    audio1.play();
+  }
+  else {
+    var audio = new Audio();
+    audio.src = "Sounds/Pop.mp3";
+    audio.play();
   }
 }
 
@@ -75,6 +86,12 @@ function countSurroundingMines (cell) {
       count = count + 1
     }
   }
+  
+  
   return count
 }
 
+function resetBoard(){
+  document.getElementsByClassName('board')[0].innerHTML = "";
+  startGame()
+}
