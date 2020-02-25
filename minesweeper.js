@@ -2,56 +2,35 @@ document.addEventListener('DOMContentLoaded', startGame)
 
 // Define your `board` object here!
 var board = {
-  cells: [
-    {row: 0, col: 0, isMine: false, hidden: true}, 
-    {row: 1, col: 0, isMine: false, hidden: true}, 
-    {row: 2, col: 0, isMine: true, hidden: true}, 
-    {row: 3, col: 0, isMine: false, hidden: true},
-    {row: 4, col: 0, isMine: false, hidden: true}, 
-    {row: 0, col: 1, isMine: false, hidden: true}, 
-    {row: 1, col: 1, isMine: true, hidden: true}, 
-    {row: 2, col: 1, isMine: false, hidden: true},
-    {row: 3, col: 1, isMine: false, hidden: true},
-    {row: 4, col: 1, isMine: true, hidden: true}, 
-    {row: 0, col: 2, isMine: false, hidden: true}, 
-    {row: 1, col: 2, isMine: true, hidden: true}, 
-    {row: 2, col: 2, isMine: false, hidden: true}, 
-    {row: 3, col: 2, isMine: true, hidden: true},
-    {row: 4, col: 2, isMine: false, hidden: true}, 
-    {row: 0, col: 3, isMine: false, hidden: true}, 
-    {row: 1, col: 3, isMine: false, hidden: true}, 
-    {row: 2, col: 3, isMine: true, hidden: true},
-    {row: 3, col: 3, isMine: false, hidden: true},
-    {row: 4, col: 3, isMine: false, hidden: true}, 
-    {row: 0, col: 4, isMine: false, hidden: true}, 
-    {row: 1, col: 4, isMine: false, hidden: true}, 
-    {row: 2, col: 4, isMine: true, hidden: true},
-    {row: 3, col: 4, isMine: false, hidden: true},
-    {row: 4, col: 4, isMine: false, hidden: true}
+  cells : [
+
   ]
 }
 
-// board = makeBoard()
-// function makeBoard (){
-//   var boardSize = 5
-//   for(i = 0; i < boardSize; i ++){//col
-//     board.cells[i] = {}
-//     board.cells[i]['col'] = i
-//     //console.log(board.cells[i])
-//     var y = 0
-//     for(y = 0; y < boardSize; y ++){
-//       board.cells[i]['row'] = y
-//       console.log(board.cells[y])
-//     }
-//   }
-//   return board
-// }
+function makeBoard (num){
+  var cells = []
+  var cellNum = 0
+  for(y = 0; y < num; y ++){
+    for(x = 0; x < num; x++){
+      cells[cellNum] = {
+        row: y,
+        col: x,
+        isMine: (Math.floor(Math.random() * 3) ) == 2,
+        hidden: true
+      }
+      cellNum ++
+    }
+  }
+  return cells
+}
+
+board.cells =  makeBoard(5)
 
 
 function startGame () {
   document.addEventListener("click", checkForWin )
   document.addEventListener("contextmenu", checkForWin )
-  // Don't remove this function call: it makes the game work!
+
   for(var i = 0; i < board.cells.length; i ++){
     surroundingMines = countSurroundingMines(board.cells[i])
     board.cells[i].surroundingMines = surroundingMines
